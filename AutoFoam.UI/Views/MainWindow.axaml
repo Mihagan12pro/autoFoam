@@ -7,7 +7,7 @@
         x:Class="AutoFoam.UI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Background="White"
+        Background="#BFDBFF"
         Title="AutoFoam">
 
     <Design.DataContext>
@@ -15,18 +15,31 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+
     <Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition />
-        <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0 1 0 0" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="1" BorderBrush="Black" Margin="20" Grid.Column="0">
+                <Image Source="/Assets/flatChannelTask.jpg" Stretch="Fill">
+                    
+                </Image>
+            </Border>
+            
+            
+        </Grid>
 
-    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 1 0 0">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Запуск расчета" Background="Red" FontFamily="Arial"/>
-        </StackPanel>
-    </Border>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 1 0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Запуск расчета" Background="Gray" FontFamily="Arial" Margin="10"/>
+            </StackPanel>
+        </Border>
 </Grid>
 </Window>
