@@ -35,36 +35,26 @@
              <ScrollViewer Grid.Column="1" Margin="20" VerticalAlignment="Center">
                 <StackPanel Spacing="8" Margin="0 0 50 0">
 
-                    <Label Content="Высота"/>
+                    <Label Content="Высота канала"/>
                     <TextBox Text="100"/>
 
-                    <Label Content="Нижняя точка канала"/>
+                    <Label Content="Высота ножки"/>
                     <TextBox Text="30"/>
 
-                    <Label Content="Верхняя точка канала"/>
-                    <TextBox Text="42"/>
-
-                    <Label Content="Высота тругольника"/>
+                     <Label Content="Высота треугольника"/>
                     <TextBox Text="20"/>
 
-                    <Label Content="Длина входа"/>
+                    <Label Content="Основание треугольника"/>
+                    <TextBox Text="20"/>
+
+                    <Label Content="Ширина входа"/>
                     <TextBox Text="50"/>
 
-                    <Label Content="Левая точка треугольника"/>
-                    <TextBox Text="10"/>
-
-                    <Label Content="Длина канала"/>
+                    <Label Content="Длина выхода"/>
                     <TextBox Text="120"/>
 
-                    <Label Content="Полвина входа"/>
-                    <TextBox Text="25" IsReadOnly="True"/>
-
-                    <Label Content="Правая точка треугольника"/>
-                    <TextBox Text="40"/>
-
-                    <Label Content="Длина конструкции"/>
-                    <TextBox Text="170"  IsReadOnly="True"/>
-
+                     <Label Content="Ширина выхода"/>
+                    <TextBox Text="120"/>
                 </StackPanel>
         </ScrollViewer>
             
