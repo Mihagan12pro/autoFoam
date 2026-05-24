@@ -1,0 +1,177 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+     
+   _______________                 _______________                 _______________
+ 4|      9|     15|             22|     27|     33|               |   4   |   5   |
+  |       |       |               |       |       |               |       |       |
+ 3|______8|_____14|_________17  21|_____26|_____32|_________35    |_______|_______|___________
+  |       |       |           |   |       |       |           |   |   3   |   6   |     9     |
+ 2|______7|_____13|_________16| 20|_____25|_____31|_________34|   |_______|_______|___________|
+  |       |       |               |       |       |               |   2   |   7   |
+ 1|______6|_____12|             19|_____24|_____30|               |_______|_______|
+  |      / \      |               |      / \      |               |      / \      |
+  |     /   \     |               |     /   \     |               |  1  /   \  8  |
+ 0|___5/   10\__11|             18|__23/   28\__29|               |____/     \____|
+     
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// *****  Новые параметры (в миллиметрах)  *****
+height              100;
+channel_bottom_point  30;
+channel_top_point     42;
+triangle_height       20;
+inlet_width           50;
+left_triangle_point   10;
+channel_length       120;
+half_of_channel_width 25;
+right_triangle_point  40;
+construction_width    170;
+
+// Количество ячеек по направлениям (оставлено без изменений)
+cell_x1 25;
+cell_x2 120;
+cell_y1 20;
+cell_y2 10;
+cell_y3 12;
+cell_y4 58;
+
+convertToMeters 0.001;
+
+vertices
+(
+    (0 0 0)                                          //0
+    (0 ${triangle_height} 0)                         //1
+    (0 ${channel_bottom_point} 0)                    //2
+    (0 ${channel_top_point} 0)                       //3
+    (0 ${height} 0)                                  //4
+    (${left_triangle_point} 0 0)                     //5
+    (${half_of_channel_width} ${triangle_height} 0)  //6
+    (${half_of_channel_width} ${channel_bottom_point} 0) //7
+    (${half_of_channel_width} ${channel_top_point} 0)    //8
+    (${half_of_channel_width} ${height} 0)               //9
+    (${right_triangle_point} 0 0)                       //10
+    (${inlet_width} 0 0)                                //11
+    (${inlet_width} ${triangle_height} 0)               //12
+    (${inlet_width} ${channel_bottom_point} 0)          //13
+    (${inlet_width} ${channel_top_point} 0)             //14
+    (${inlet_width} ${height} 0)                        //15
+    (${construction_width} ${channel_bottom_point} 0)   //16
+    (${construction_width} ${channel_top_point} 0)      //17
+    (0 0 1)                                             //18
+    (0 ${triangle_height} 1)                            //19
+    (0 ${channel_bottom_point} 1)                       //20
+    (0 ${channel_top_point} 1)                          //21
+    (0 ${height} 1)                                     //22
+    (${left_triangle_point} 0 1)                        //23
+    (${half_of_channel_width} ${triangle_height} 1)     //24
+    (${half_of_channel_width} ${channel_bottom_point} 1)//25
+    (${half_of_channel_width} ${channel_top_point} 1)   //26
+    (${half_of_channel_width} ${height} 1)              //27
+    (${right_triangle_point} 0 1)                       //28
+    (${inlet_width} 0 1)                                //29
+    (${inlet_width} ${triangle_height} 1)               //30
+    (${inlet_width} ${channel_bottom_point} 1)          //31
+    (${inlet_width} ${channel_top_point} 1)             //32
+    (${inlet_width} ${height} 1)                        //33
+    (${construction_width} ${channel_bottom_point} 1)   //34
+    (${construction_width} ${channel_top_point} 1)      //35
+);
+
+blocks
+(
+    hex (0 5 6 1 18 23 24 19) (${cell_x1} ${cell_y1} 1) simpleGrading (1 1 1)     //1
+    hex (1 6 7 2 19 24 25 20) (${cell_x1} ${cell_y2} 1) simpleGrading (1 1 1)     //2
+    hex (2 7 8 3 20 25 26 21) (${cell_x1} ${cell_y3} 1) simpleGrading (1 1 1)     //3
+    hex (3 8 9 4 21 26 27 22) (${cell_x1} ${cell_y4} 1) simpleGrading (1 1 1)     //4
+    hex (10 11 12 6 28 29 30 24) (${cell_x1} ${cell_y1} 1) simpleGrading (1 1 1)  //5
+    hex (6 12 13 7 24 30 31 25) (${cell_x1} ${cell_y2} 1) simpleGrading (1 1 1)   //6
+    hex (7 13 14 8 25 31 32 26) (${cell_x1} ${cell_y3} 1) simpleGrading (1 1 1)   //7
+    hex (8 14 15 9 26 32 33 27) (${cell_x1} ${cell_y4} 1) simpleGrading (1 1 1)   //8 
+    hex (13 16 17 14 31 34 35 32) (${cell_x2} ${cell_y3} 1) simpleGrading (1 1 1) //9
+);
+
+boundary
+(
+    frontWall
+    {
+        type empty;
+        faces
+        (
+            (0 5 6 1)
+            (10 11 12 6)
+            (1 6 7 2)
+            (6 12 13 7)
+            (2 7 8 3)
+            (7 13 14 8)
+            (13 16 17 14)
+            (3 8 9 4)
+            (8 14 15 9)
+        );
+    }
+    backWall
+    {
+        type empty;
+        faces
+        (
+            (18 23 24 19)
+            (28 29 30 24)
+            (19 24 25 20)
+            (24 30 31 25)
+            (20 25 26 21)
+            (25 31 32 26)
+            (31 34 35 32)
+            (21 26 27 22)
+            (26 32 33 27)
+        );
+    }
+    sideWall
+    {
+        type wall;
+        faces
+        (
+            (0 5 23 18)
+            (5 6 24 23)
+            (6 10 28 24)
+            (10 11 29 28)
+            (11 12 30 29)
+            (12 13 31 30)
+            (14 15 33 32)
+            (13 16 34 31)
+            (14 17 35 32)
+            (0 1 19 18)
+            (1 2 20 19)
+            (2 3 21 20)
+            (3 4 22 21)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (16 17 35 34)
+        );
+    }
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (4 9 27 22)
+            (9 15 33 27)
+        );
+    }
+);
+
+// ************************************************************************* //
