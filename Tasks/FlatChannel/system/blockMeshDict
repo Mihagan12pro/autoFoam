@@ -4,20 +4,8 @@
    \\    /   O peration     | Website:  https://openfoam.org
     \\  /    A nd           | Version:  13
      \\/     M anipulation  |
-     
-   _______________                 _______________                 _______________
- 4|      9|     15|             22|     27|     33|               |   4   |   5   |
-  |       |       |               |       |       |               |       |       |
- 3|______8|_____14|_________17  21|_____26|_____32|_________35    |_______|_______|___________
-  |       |       |           |   |       |       |           |   |   3   |   6   |     9     |
- 2|______7|_____13|_________16| 20|_____25|_____31|_________34|   |_______|_______|___________|
-  |       |       |               |       |       |               |   2   |   7   |
- 1|______6|_____12|             19|_____24|_____30|               |_______|_______|
-  |      / \      |               |      / \      |               |      / \      |
-  |     /   \     |               |     /   \     |               |  1  /   \  8  |
- 0|___5/   10\__11|             18|__23/   28\__29|               |____/     \____|
-     
 \*---------------------------------------------------------------------------*/
+
 FoamFile
 {
     format      ascii;
@@ -26,66 +14,62 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// *****  Новые параметры (в миллиметрах)  *****
-height              100;
-channel_bottom_point  30;
-channel_top_point     42;
-triangle_height       20;
-inlet_width           50;
-left_triangle_point   10;
-channel_length       120;
-half_of_channel_width 25;
-right_triangle_point  40;
-construction_width    170;
-
-// Количество ячеек по направлениям (оставлено без изменений)
 cell_x1 25;
 cell_x2 120;
 cell_y1 20;
 cell_y2 10;
 cell_y3 12;
 cell_y4 58;
+x1 17;
+x2 25;
+x3 33;
+x4 50;
+x5 170;
+y1 20;
+y2 30;
+y3 42;
+y4 100;
 
 convertToMeters 0.001;
 
 vertices
 (
-    (0 0 0)                                          //0
-    (0 ${triangle_height} 0)                         //1
-    (0 ${channel_bottom_point} 0)                    //2
-    (0 ${channel_top_point} 0)                       //3
-    (0 ${height} 0)                                  //4
-    (${left_triangle_point} 0 0)                     //5
-    (${half_of_channel_width} ${triangle_height} 0)  //6
-    (${half_of_channel_width} ${channel_bottom_point} 0) //7
-    (${half_of_channel_width} ${channel_top_point} 0)    //8
-    (${half_of_channel_width} ${height} 0)               //9
-    (${right_triangle_point} 0 0)                       //10
-    (${inlet_width} 0 0)                                //11
-    (${inlet_width} ${triangle_height} 0)               //12
-    (${inlet_width} ${channel_bottom_point} 0)          //13
-    (${inlet_width} ${channel_top_point} 0)             //14
-    (${inlet_width} ${height} 0)                        //15
-    (${construction_width} ${channel_bottom_point} 0)   //16
-    (${construction_width} ${channel_top_point} 0)      //17
-    (0 0 1)                                             //18
-    (0 ${triangle_height} 1)                            //19
-    (0 ${channel_bottom_point} 1)                       //20
-    (0 ${channel_top_point} 1)                          //21
-    (0 ${height} 1)                                     //22
-    (${left_triangle_point} 0 1)                        //23
-    (${half_of_channel_width} ${triangle_height} 1)     //24
-    (${half_of_channel_width} ${channel_bottom_point} 1)//25
-    (${half_of_channel_width} ${channel_top_point} 1)   //26
-    (${half_of_channel_width} ${height} 1)              //27
-    (${right_triangle_point} 0 1)                       //28
-    (${inlet_width} 0 1)                                //29
-    (${inlet_width} ${triangle_height} 1)               //30
-    (${inlet_width} ${channel_bottom_point} 1)          //31
-    (${inlet_width} ${channel_top_point} 1)             //32
-    (${inlet_width} ${height} 1)                        //33
-    (${construction_width} ${channel_bottom_point} 1)   //34
-    (${construction_width} ${channel_top_point} 1)      //35
+    (0 0 0)                //0
+    (0 ${y1} 0)            //1
+    (0 ${y2} 0)            //2
+    (0 ${y3} 0)            //3
+    (0 ${y4} 0)            //4
+    (${x1} 0 0)            //5
+    (${x2} ${y1} 0)        //6
+    (${x2} ${y2} 0)        //7
+    (${x2} ${y3} 0)        //8
+    (${x2} ${y4} 0)        //9
+    (${x3} 0 0)            //10
+    (${x4} 0 0)            //11
+    (${x4} ${y1} 0)        //12
+    (${x4} ${y2} 0)        //13
+    (${x4} ${y3} 0)        //14
+    (${x4} ${y4} 0)        //15
+    (${x5} ${y2} 0)        //16
+    (${x5} ${y3} 0)        //17
+    (0 0 1)                //18
+    (0 ${y1} 1)            //19
+    (0 ${y2} 1)            //20
+    (0 ${y3} 1)            //21
+    (0 ${y4} 1)            //22
+    (${x1} 0 1)            //23
+    (${x2} ${y1} 1)        //24
+    (${x2} ${y2} 1)        //25
+    (${x2} ${y3} 1)        //26
+    (${x2} ${y4} 1)        //27
+    (${x3} 0 1)            //28
+    (${x4} 0 1)            //29
+    (${x4} ${y1} 1)        //30
+    (${x4} ${y2} 1)        //31
+    (${x4} ${y3} 1)        //32
+    (${x4} ${y4} 1)        //33
+    (${x5} ${y2} 1)        //34
+    (${x5} ${y3} 1)        //35
 );
 
 blocks
@@ -173,5 +157,7 @@ boundary
         );
     }
 );
+
+// ************************************************************************* //
 
 // ************************************************************************* //

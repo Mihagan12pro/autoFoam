@@ -8,42 +8,11 @@
 FoamFile
 {
     format      ascii;
-    class       volScalarField;
-    location    "0";
-    object      p;
+    class       dictionary;
+    object      momentumTransport;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -2 0 0 0 0];
-internalField   uniform 0;
-boundaryField
-{
-    outlet
-    {
-        type            fixedValue;
-        value           uniform 0;
-    }
-    
-    inlet
-    {
-        type            zeroGradient;
-    }
-    
-    frontWall
-    {
-        type            empty;
-    }
-    
-    backWall
-    {
-         type           empty;
-    }
-    
-    sideWall
-    {
-        type            zeroGradient;
-    }
-}
-
+simulationType laminar;
 
 // ************************************************************************* //
