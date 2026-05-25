@@ -1,6 +1,7 @@
 ﻿namespace AutoFoam.UI.Models.FlatChannel
 {
-    public class FlatChannel
+    public class FlatChannelBlockMesh
     {
+
     }
 }

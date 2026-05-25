@@ -49,7 +49,7 @@
                   VerticalAlignment="Stretch">
 
                 <Grid Margin="0 0 50 0"
-                      RowDefinitions="*,*,*,*,*,*,*">
+                      RowDefinitions="*,*,*,*,*,*,*,*">
 
                     <StackPanel Grid.Row="0">
                         <Label Content="Высота канала"/>
@@ -86,6 +86,11 @@
                         <TextBox Text="120"/>
                     </StackPanel>
 
+                     <StackPanel Grid.Row="7">
+                        <Label Content="Скорость на входе"/>
+                        <TextBox Text="3"/>
+                    </StackPanel>
+
                 </Grid>
             </ScrollViewer>
              <Button 
@@ -93,7 +98,8 @@
                 Grid.Column="0"
                 Grid.Row="1"
                 HorizontalAlignment="Left"
-                Margin="50 0 70 20">
+                Margin="50 0 70 20"
+                Command="{Binding SaveProject}">
             </Button>
             <Button 
                 Content="Открыть ParaView..."
