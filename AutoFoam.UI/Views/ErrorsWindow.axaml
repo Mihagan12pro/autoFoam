@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+ï»¿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:vm="using:AutoFoam.UI.ViewModels"
@@ -11,7 +11,7 @@
         Width="450"
         Height="450"
          x:DataType="vm:ErrorsWindowViewModel"
-        Title="Îøèáêè">
+        Title="ÐžÑˆÐ¸Ð±ÐºÐ¸">
         <Border 
             Margin="30"
             BorderBrush="Black" 
