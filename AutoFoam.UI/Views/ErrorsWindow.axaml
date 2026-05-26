@@ -1,18 +1,21 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:vm="using:AutoFoam.UI.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="using:AutoFoam.UI.ViewModels"
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
         x:Class="AutoFoam.UI.ErrorsWindow"
         CanResize="False"
         Background="#BFDBFF"
+         x:DataType="vm:ErrorsWindowViewModel"
         Title="Îøèáêè">
         <Border 
             Margin="30"
             BorderBrush="Black" 
             BorderThickness="1">
             <ScrollViewer Margin="10">
-                <ListBox Background="#BFDBFF">
+                <ListBox Background="#BFDBFF" ItemsSource="{Binding Errors}">
                     
                 </ListBox>
             </ScrollViewer>

@@ -23,7 +23,18 @@ namespace AutoFoam.UI.Models.FlatChannel
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new System.NotImplementedException();
+            List<ValidationResult> errors = new List<ValidationResult>();
+
+            if (LegHeight <= TriangleHeight)
+                errors.Add(new ValidationResult("Высота треугольника должна быть меньше длины ножки!"));
+
+            if (ChannelHeight <= LegHeight + OutletWidth)
+                errors.Add(new ValidationResult("Высота канала должна быть больше суммы длины ножки и ширины выхода!"));
+
+            if (TriangleBase >= InletWidth)
+                errors.Add(new ValidationResult("Основание треугольника должна быть меньше толщины входа!"));
+
+            return errors;
         }
     }
 }

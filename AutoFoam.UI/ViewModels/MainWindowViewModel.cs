@@ -1,10 +1,14 @@
-﻿using AutoFoam.UI.Models.FlatChannel;
+﻿using AutoFoam.UI.Extensions;
+using AutoFoam.UI.Models.FlatChannel;
+using AutoFoam.UI.Services.Calculations;
 using AutoFoam.UI.Services.Dialog;
+using AutoFoam.UI.Services.Shell;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -14,6 +18,8 @@ namespace AutoFoam.UI.ViewModels
     public partial class MainWindowViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly IDialogsService _dialogsService;
+        private readonly ICalculationService _culculationService;
+        private readonly IShellExecuter _shellExecuter;
 
         private readonly Dictionary<string, List<string>> _errors = new();
 
@@ -229,7 +235,36 @@ namespace AutoFoam.UI.ViewModels
         {
             FlatChannel flatChannel = new FlatChannel();
 
-            flatChannel.SetValues(this, nameof(OutletLengthText));
+            flatChannel.SetValues(this, 
+                    nameof(InletSpeedText),
+                    
+                    nameof(InletWidthText),
+                    
+                    nameof(ChannelHeightText),
+                    
+                    nameof(LegHeightText),
+                    
+                    nameof(TriangleBaseText),
+                    
+                    nameof(TriangleHeightText),
+
+                    nameof(OutletLengthText),
+
+                    nameof(OutletWidthText)
+                );
+
+            var results = new List<ValidationResult>();
+
+            var context = new ValidationContext(flatChannel);
+
+            if (!Validator.TryValidateObject(flatChannel, context, results, true))
+            {
+                results.ToStrings();
+
+                return;
+            }
+            
+
         }
 
         public IEnumerable GetErrors(string? propertyName)
@@ -249,6 +284,7 @@ namespace AutoFoam.UI.ViewModels
             SetInitialParameters();
 
             _dialogsService = new DialogsService(this);
+            _culculationService = new CalculationService();
         }
     }
 }
