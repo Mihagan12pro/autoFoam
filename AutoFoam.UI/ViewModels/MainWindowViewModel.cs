@@ -16,16 +16,34 @@ namespace AutoFoam.UI.ViewModels
 
         private readonly Dictionary<string, List<string>> _errors = new();
 
-        private string _inletSpeedText;
+        private string _inletSpeedText, _inletWidthText, _channelHeightText, 
+            _legHeightText, _triangleHeightText, _triangleBaseText,
+            _outletWidthText, _outletLengthText;
+
+        private bool _startCulculationEnabled;
 
         private void SetInitialParameters()
         {
             InletSpeedText = "3";
+            InletWidthText = "50";
+            ChannelHeightText = "100";
+            LegHeightText = "30";
+            TriangleHeightText = "20";
+            TriangleBaseText = "20";
+            OutletWidthText = "50";
+            OutletLengthText = "120";
         }
 
         private async Task SetInitialParametersAsync()
         {
             InletSpeedText = "3";
+            InletWidthText = "50";
+            ChannelHeightText = "100";
+            LegHeightText = "30";
+            TriangleHeightText = "20";
+            TriangleBaseText = "20";
+            OutletWidthText = "50";
+            OutletLengthText = "120";
         }
 
         private void AddError(string propertyName, string error)
@@ -93,6 +111,104 @@ namespace AutoFoam.UI.ViewModels
             }
         }
 
+        [DisplayName("Ширина входа")]
+        public string InletWidthText
+        {
+            get => _inletWidthText;
+
+            set
+            {
+                if (SetProperty(ref _inletWidthText, value))
+                {
+                    ValidateDoubleVariable(nameof(InletWidthText));
+                }
+            }
+        }
+
+        [DisplayName("Высота канала")]
+        public string ChannelHeightText
+        {
+            get => _channelHeightText;
+            set
+            {
+                if (SetProperty(ref _channelHeightText, value))
+                {
+                    ValidateDoubleVariable(nameof(ChannelHeightText));
+                }
+            }
+        }
+
+        [DisplayName("Высота ножки")]
+        public string LegHeightText
+        {
+            get => _legHeightText;
+            set
+            {
+                if (SetProperty(ref _legHeightText, value))
+                {
+                    ValidateDoubleVariable(nameof(LegHeightText));
+                }
+            }
+        }
+
+        [DisplayName("Высота треугольника")]
+        public string TriangleHeightText
+        {
+            get => _triangleHeightText;
+            set
+            {
+                if (SetProperty(ref _triangleHeightText, value))
+                {
+                    ValidateDoubleVariable(nameof(TriangleHeightText));
+                }
+            }
+        }
+
+        [DisplayName("Основание треугольника")]
+        public string TriangleBaseText
+        {
+            get => _triangleBaseText;
+            set
+            {
+                if (SetProperty(ref _triangleBaseText, value))
+                {
+                    ValidateDoubleVariable(nameof(TriangleBaseText));
+                }
+            }
+        }
+
+        [DisplayName("Ширина выхода")]
+        public string OutletWidthText
+        {
+            get => _outletWidthText;
+            set
+            {
+                if (SetProperty(ref _outletWidthText, value))
+                {
+                    ValidateDoubleVariable(nameof(OutletWidthText));
+                }
+            }
+        }
+
+        [DisplayName("Длина выхода")]
+        public string OutletLengthText
+        {
+            get => _outletLengthText;
+            set
+            {
+                if (SetProperty(ref _outletLengthText, value))
+                {
+                    ValidateDoubleVariable(nameof(OutletLengthText));
+                }
+            }
+        }
+
+        public bool StartCalculationEnabled
+        {
+            get => _startCulculationEnabled;
+            set { SetProperty(ref _startCulculationEnabled, value); }
+        }
+
         public bool HasErrors 
             => _errors.Count > 0;
 
@@ -112,6 +228,8 @@ namespace AutoFoam.UI.ViewModels
         {
             if (propertyName == null)
                 return Enumerable.Empty<string>();
+
+            StartCalculationEnabled = !HasErrors;
 
             return _errors.TryGetValue(propertyName, out var errors)
                 ? errors

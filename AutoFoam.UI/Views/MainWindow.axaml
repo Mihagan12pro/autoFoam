@@ -51,46 +51,45 @@
                 <Grid Margin="0 0 50 0"
                       RowDefinitions="*,*,*,*,*,*,*,*">
 
-                    <StackPanel Grid.Row="0">
+                             <StackPanel Grid.Row="0">
                         <Label Content="Высота канала"/>
-                        <TextBox Text="100"/>
+                        <TextBox Text="{Binding ChannelHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
                         <Label Content="Высота ножки"/>
-                        <TextBox Text="30"/>
+                        <TextBox Text="{Binding LegHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2">
                         <Label Content="Высота треугольника"/>
-                        <TextBox Text="20"/>
+                        <TextBox Text="{Binding TriangleHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3">
                         <Label Content="Основание треугольника"/>
-                        <TextBox Text="20"/>
+                        <TextBox Text="{Binding TriangleBaseText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="4">
                         <Label Content="Ширина входа"/>
-                        <TextBox Text="50"/>
+                        <TextBox Text="{Binding InletWidthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="5">
                         <Label Content="Длина выхода"/>
-                        <TextBox Text="120"/>
+                        <TextBox Text="{Binding OutletLengthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="6">
                         <Label Content="Ширина выхода"/>
-                        <TextBox Text="120"/>
+                        <TextBox Text="{Binding OutletWidthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
-                     <StackPanel Grid.Row="7">
+                    <StackPanel Grid.Row="7">
                         <Label Content="Скорость на входе"/>
                         <TextBox Text="{Binding InletSpeedText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
-
                 </Grid>
             </ScrollViewer>
              <Button 
@@ -119,9 +118,22 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="Сбросить" Margin="50 10" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding Clear}"></Button>
+                <Button 
+                    Grid.Column="0"
+                    Content="Сбросить"
+                    Margin="50 10" 
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding Clear}">
+                </Button>
                 <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green"></TextBlock>
-                <Button Grid.Column="2" Content="Запуск расчета" Margin="70 10" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Button 
+                    Grid.Column="2" 
+                    Content="Запуск расчета"
+                    Margin="70 10"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                                        IsEnabled="{Binding StartCalculationEnabled}"/>
             </Grid>
         </Border>
     </Grid>
