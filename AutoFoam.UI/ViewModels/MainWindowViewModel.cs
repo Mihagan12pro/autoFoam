@@ -259,7 +259,7 @@ namespace AutoFoam.UI.ViewModels
 
             if (!Validator.TryValidateObject(flatChannel, context, results, true))
             {
-                results.ToStrings();
+                await _dialogsService.ShowErrors(results.ToStrings());
 
                 return;
             }

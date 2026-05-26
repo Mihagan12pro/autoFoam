@@ -6,8 +6,10 @@
         xmlns:viewmodels="using:AutoFoam.UI.ViewModels"
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
         x:Class="AutoFoam.UI.ErrorsWindow"
-        CanResize="False"
+        Icon="/Assets/avalonia-logo.ico"
         Background="#BFDBFF"
+        Width="450"
+        Height="450"
          x:DataType="vm:ErrorsWindowViewModel"
         Title="Îøèáêè">
         <Border 

@@ -1,7 +1,9 @@
 ﻿using AutoFoam.UI.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,13 +14,12 @@ namespace AutoFoam.UI.Services.Dialog
     internal class DialogsService : IDialogsService
     {
         private readonly ViewModelBase _viewModel;
+        private readonly TopLevel _topLevel;
 
         public async Task SaveProject()
         {
-            var topLevel = TopLevel.GetTopLevel(ViewLocator.ResolveViewFromViewModel(_viewModel));
-
-            var storageProvider = topLevel.StorageProvider;
-            var storageFolder = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions() {  AllowMultiple = false });
+            var storageProvider = _topLevel.StorageProvider;
+            var storageFolder = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions() {  AllowMultiple = false, Title = "Выбор папки для сохранения" });
 
             var folder = storageFolder.FirstOrDefault();
 
@@ -50,9 +51,23 @@ namespace AutoFoam.UI.Services.Dialog
             }
         }
 
+        public async Task ShowErrors(IEnumerable<string> errors)
+        {
+            ErrorsWindowViewModel errorsWindowView = new ErrorsWindowViewModel(errors);
+
+            ErrorsWindow window = new ErrorsWindow();
+            window.DataContext = errorsWindowView;
+
+            Window parent = ViewLocator.ResolveViewFromViewModel(_viewModel);
+
+            window.Show();
+            //await window.ShowDialog(parent);
+        }
+
         public DialogsService(ViewModelBase viewModel)
         {
             _viewModel = viewModel;
+            _topLevel = TopLevel.GetTopLevel(ViewLocator.ResolveViewFromViewModel(_viewModel));
         }
     }
 }
