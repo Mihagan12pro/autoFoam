@@ -1,4 +1,5 @@
-﻿using AutoFoam.UI.Services.Dialog;
+﻿using AutoFoam.UI.Models.FlatChannel;
+using AutoFoam.UI.Services.Dialog;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections;
@@ -222,6 +223,11 @@ namespace AutoFoam.UI.ViewModels
         public async Task Clear()
         {
             await SetInitialParametersAsync();
+        }
+
+        public async Task StartCalculations()
+        {
+            FlatChannel flatChannel = new FlatChannel();
         }
 
         public IEnumerable GetErrors(string? propertyName)
