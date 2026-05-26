@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reflection;
 
 namespace AutoFoam.UI.Models
@@ -19,8 +20,10 @@ namespace AutoFoam.UI.Models
 
         public void SetValues(object source, params string[] sourcePropertyNames)
         {
-            ModelBase target = this;
-            Type targetType = target.GetType();
+            Type targetType = this.GetType();
+
+            var props = targetType.GetProperties()
+                .Select(p => p.Name);
 
             foreach (var sourcePropertyName in sourcePropertyNames)
             {
@@ -28,10 +31,26 @@ namespace AutoFoam.UI.Models
 
                 string targetPropertyName = sourcePropertyName.Replace("Text", "");
 
-                PropertyInfo? targetProperty = targetType.GetType().GetProperty(targetPropertyName);
+                PropertyInfo? targetProperty = targetType.GetProperty(targetPropertyName);
 
                 object? sourceValue = sourceProperty.GetValue(source);
-                targetProperty.SetValue(target, sourceValue);
+
+                object converted;
+
+                if ( (targetProperty.PropertyType == typeof(double)))
+                {
+                    converted = Convert.ToDouble(sourceValue);
+                }
+                else if (targetProperty.PropertyType == typeof(int))
+                {
+                    converted= Convert.ToInt32(sourceValue);
+                }
+                else
+                {
+                    converted = source;
+                }
+
+                targetProperty.SetValue(this, converted);
             }
         }
     }

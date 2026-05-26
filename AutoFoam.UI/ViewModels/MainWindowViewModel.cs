@@ -228,6 +228,8 @@ namespace AutoFoam.UI.ViewModels
         public async Task StartCalculations()
         {
             FlatChannel flatChannel = new FlatChannel();
+
+            flatChannel.SetValues(this, nameof(OutletLengthText));
         }
 
         public IEnumerable GetErrors(string? propertyName)

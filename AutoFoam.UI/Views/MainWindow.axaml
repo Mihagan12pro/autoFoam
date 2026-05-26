@@ -133,7 +133,9 @@
                     Margin="70 10"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center"
-                                        IsEnabled="{Binding StartCalculationEnabled}"/>
+                    IsEnabled="{Binding StartCalculationEnabled}"
+                    Command="{Binding StartCalculations}">
+                </Button>
             </Grid>
         </Border>
     </Grid>
