@@ -8,6 +8,18 @@ namespace AutoFoam.UI.ViewModels
     {
         private readonly IDialogsService _dialogsService;
 
+        private double _inletSpeed;
+
+        public double InletSpeed
+        {
+            get => _inletSpeed;
+
+            set 
+            {
+                var a = SetProperty(ref _inletSpeed, value);
+            }
+        }
+
         [RelayCommand]
         public async Task SaveProject()
         {

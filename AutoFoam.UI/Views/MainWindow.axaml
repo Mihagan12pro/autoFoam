@@ -88,7 +88,7 @@
 
                      <StackPanel Grid.Row="7">
                         <Label Content="Скорость на входе"/>
-                        <TextBox Text="3"/>
+                        <TextBox Text="{Binding InletSpeed, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                 </Grid>
