@@ -9,7 +9,6 @@ FoamFile
 {
     format      ascii;
     class       dictionary;
-    location    "system";
     object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -18,38 +17,46 @@ solvers
 {
     p
     {
-        solver           GAMG;
-        smoother         DICGaussSeidel;
-        tolerance        1e-6;
-        relTol           0.01;
-    }
-
-    pFinal
-    {
-        $p;
-        relTol          0;
-    }
-
-    "(U|tracer)"
-    {
-        solver          PBiCGStab;
-        preconditioner  DILU;
-        tolerance       1e-05;
+        solver          GAMG;
+        smoother        GaussSeidel;
+        tolerance       1e-6;
         relTol          0.1;
     }
 
-    "(U|tracer)Final"
+    "(U|k|omega|epsilon)"
     {
-        $U;
-        relTol          0;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-7;
+        relTol          0.1;
     }
 }
 
 PIMPLE
 {
-    nNonOrthogonalCorrectors 1;
-    nCorrectors         2;
+    residualControl
+    {
+        p               1e-5;
+        U               1e-5;
+        "(k|omega|epsilon)" 1e-5;
+    }
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+
 }
 
+relaxationFactors
+{
+    fields
+    {
+        p               0.3;
+    }
+    equations
+    {
+        U               0.7;
+        "(k|omega|epsilon)" 0.7;
+    }
+}
 
 // ************************************************************************* //

@@ -1,7 +1,4 @@
 #!/bin/bash
-rm -rf [1-9]*
-rm -rf dynamicCode
-rm -rf constant/polyMesh
-rm -rf 0
-cp -r 0_org 0
-echo "Done"
+find . -maxdepth 1 -type d -regextype posix-extended -regex './[0-9]+(\.[0-9]+)?' ! -name "0" -exec rm -rf {} \;
+
+echo "Cleanup done. Folder 0 preserved."

@@ -1,25 +1,49 @@
 #!/bin/bash
-eval $(awk 'NR%2==1{name=$0; getline val; print name "=" val}' params.txt)
 
-sed -i \
-  -e "s/^height .*/height              ${height};/" \
-  -e "s/^channel_bottom_point .*/channel_bottom_point  ${channel_bottom_point};/" \
-  -e "s/^channel_top_point .*/channel_top_point     ${channel_top_point};/" \
-  -e "s/^triangle_height .*/triangle_height       ${triangle_height};/" \
-  -e "s/^inlet_width .*/inlet_width           ${inlet_width};/" \
-  -e "s/^left_triangle_point .*/left_triangle_point   ${left_triangle_point};/" \
-  -e "s/^channel_length .*/channel_length       ${channel_length};/" \
-  -e "s/^half_of_channel_width .*/half_of_channel_width ${half_of_channel_width};/" \
-  -e "s/^right_triangle_point .*/right_triangle_point  ${right_triangle_point};/" \
-  -e "s/^construction_width .*/construction_width    ${construction_width};/" \
-  -e "s/^cell_x1 .*/cell_x1 ${cell_x1};/" \
-  -e "s/^cell_x2 .*/cell_x2 ${cell_x2};/" \
-  -e "s/^cell_y1 .*/cell_y1 ${cell_y1};/" \
-  -e "s/^cell_y2 .*/cell_y2 ${cell_y2};/" \
-  -e "s/^cell_y3 .*/cell_y3 ${cell_y3};/" \
-  -e "s/^cell_y4 .*/cell_y4 ${cell_y4};/" \
-  system/blockMeshDict
+PARAMS_FILE="params.txt"
+BLOCKMESH="system/blockMeshDict"
+U_FILE="0/U"   # если у вас файл в 0_org/U — поменяйте здесь
 
-sed -i "19s/.*/U ${U};/" 0_org/U
+# Проверка наличия файлов
+if [ ! -f "$PARAMS_FILE" ]; then
+    echo "Ошибка: $PARAMS_FILE не найден"
+    exit 1
+fi
 
-echo params changed
+# Обновление переменной в blockMeshDict (кроме U)
+update_blockmesh_var() {
+    local var_name="$1"
+    local new_value="$2"
+    sed -i -E "s/^(${var_name}[[:space:]]+)[0-9]+;/\1${new_value};/" "$BLOCKMESH"
+}
+
+# Обновление U в файле 0/U
+update_U() {
+    local new_value="$1"
+    if [ -f "$U_FILE" ]; then
+        sed -i -E "s/^(U[[:space:]]+)-?[0-9]+;/\1${new_value};/" "$U_FILE"
+        echo "Обновлено U = $new_value в $U_FILE"
+    else
+        echo "Предупреждение: $U_FILE не найден, U не обновлён"
+    fi
+}
+
+# Чтение params.txt (пары: имя_переменной, значение)
+mapfile -t lines < "$PARAMS_FILE"
+
+for (( i=0; i<${#lines[@]}; i+=2 )); do
+    var_name="${lines[i]}"
+    var_value="${lines[i+1]}"
+    if [[ "$var_name" == "U" ]]; then
+        update_U "$var_value"
+    else
+        if [ -f "$BLOCKMESH" ]; then
+            update_blockmesh_var "$var_name" "$var_value"
+            echo "Обновлено $var_name = $var_value в blockMeshDict"
+        else
+            echo "Предупреждение: $BLOCKMESH не найден"
+        fi
+    fi
+done
+
+echo "Готово."
