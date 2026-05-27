@@ -1,13 +1,11 @@
 ﻿using AutoFoam.UI.ViewModels;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Tmds.DBus.Protocol;
 
 namespace AutoFoam.UI.Services.Dialog
 {
@@ -61,7 +59,6 @@ namespace AutoFoam.UI.Services.Dialog
             Window parent = ViewLocator.ResolveViewFromViewModel(_viewModel);
 
             window.Show();
-            //await window.ShowDialog(parent);
         }
 
         public DialogsService(ViewModelBase viewModel)

@@ -229,6 +229,9 @@ namespace AutoFoam.UI.ViewModels
         public async Task Clear()
         {
             await SetInitialParametersAsync();
+
+            if (_shellExecuter.ExecuteClean())
+                OutletLengthText = "-100";
         }
 
         public async Task StartCalculations()
@@ -263,8 +266,6 @@ namespace AutoFoam.UI.ViewModels
 
                 return;
             }
-            
-
         }
 
         public IEnumerable GetErrors(string? propertyName)
@@ -284,7 +285,10 @@ namespace AutoFoam.UI.ViewModels
             SetInitialParameters();
 
             _dialogsService = new DialogsService(this);
+
             _culculationService = new CalculationService();
+            
+            _shellExecuter = new FlatChannelExecuter();
         }
     }
 }
