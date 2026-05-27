@@ -46,15 +46,7 @@ namespace AutoFoam.UI.Services.Shell
 
         public async Task<int> ExecuteClean()
         {
-            string cleanPath = Path.Combine(sourcePath, "Clean.sh");
-
-            File.Create(Path.Combine(sourcePath, "foo.txt")).Close();
-            using(StreamWriter writer = new StreamWriter(Path.Combine(sourcePath, "foo.txt")))
-            {
-                writer.WriteLine(cleanPath);
-
-                writer.Close();
-            }
+            string cleanPath = Path.Combine(sourcePath, "ParaView.sh");
 
             var result = await Execute(cleanPath);
 
