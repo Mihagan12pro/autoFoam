@@ -24,9 +24,7 @@ namespace AutoFoam.UI.Services.Shell
             {
                 FileName = "/bin/bash",
                 Arguments = $"\"{scriptPath}\"", 
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
+                UseShellExecute = true,
                 CreateNoWindow = true
             };
 
