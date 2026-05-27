@@ -46,7 +46,15 @@ namespace AutoFoam.UI.Services.Shell
 
         public async Task<int> ExecuteClean()
         {
-            string cleanPath = $"{sourcePath}/Clean.sh";
+            string cleanPath = Path.Combine(sourcePath, "Clean.sh");
+
+            File.Create(Path.Combine(sourcePath, "foo.txt")).Close();
+            using(StreamWriter writer = new StreamWriter(Path.Combine(sourcePath, "foo.txt")))
+            {
+                writer.WriteLine(cleanPath);
+
+                writer.Close();
+            }
 
             var result = await Execute(cleanPath);
 
