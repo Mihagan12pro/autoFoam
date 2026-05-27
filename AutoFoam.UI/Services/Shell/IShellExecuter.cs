@@ -9,28 +9,28 @@ namespace AutoFoam.UI.Services.Shell
         /// Executes Clean.sh
         /// </summary>
         /// <returns></returns>
-        Task<bool> ExecuteClean();
+        Task<int> ExecuteClean();
 
         /// <summary>
         /// Executes ChangeParams.sh
         /// </summary>
         /// <param name="flatChannel"></param>
         /// <returns></returns>
-        Task<bool> ExecuteChangeParams(FlatChannel flatChannel);
+        Task<int> ExecuteChangeParams(FlatChannel flatChannel);
 
         /// <summary>
         /// Opens ParaView
         /// </summary>
         /// <returns></returns>
-        Task<bool> ExecuteParaView();
+        Task<int> ExecuteParaView();
 
         /// <summary>
         /// Executes Run.sh
         /// </summary>
         /// <param name="flatChannel"></param>
         /// <returns></returns>
-        Task<bool> ExecuteRun(FlatChannel flatChannel);
+        Task<int> ExecuteRun(FlatChannel flatChannel);
 
-        Task<bool> Execute(string scriptPath);
+        Task<int> Execute(string scriptPath);
     }
 }

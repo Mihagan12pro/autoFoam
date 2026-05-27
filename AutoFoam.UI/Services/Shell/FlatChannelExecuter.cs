@@ -18,7 +18,7 @@ namespace AutoFoam.UI.Services.Shell
                     "FlatChannel"
                 );
 
-        public async Task<bool> Execute(string scriptPath)
+        public async Task<int> Execute(string scriptPath)
         {
             var processInfo = new ProcessStartInfo
             {
@@ -37,41 +37,30 @@ namespace AutoFoam.UI.Services.Shell
 
                 process.WaitForExit();
 
-                if (process.ExitCode == 0)
-                {
-                    Console.WriteLine($"Успех:\n{output}");
-
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"Ошибка (код {process.ExitCode}):\n{error}");
-
-                    return false;
-                }
+                return process.ExitCode;
             }
         }
 
-        public async Task<bool> ExecuteChangeParams(FlatChannel flatChannel)
+        public async Task<int> ExecuteChangeParams(FlatChannel flatChannel)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> ExecuteClean()
+        public async Task<int> ExecuteClean()
         {
             string cleanPath = Path.Combine(sourcePath, "Clean.sh");
 
-            Process.Start(cleanPath);
+            var result = await Execute(cleanPath);
 
-            return true;
+            return result;
         }
 
-        public async Task<bool> ExecuteParaView()
+        public async Task<int> ExecuteParaView()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> ExecuteRun(FlatChannel flatChannel)
+        public async Task<int> ExecuteRun(FlatChannel flatChannel)
         {
             throw new NotImplementedException();
         }

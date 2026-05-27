@@ -230,10 +230,8 @@ namespace AutoFoam.UI.ViewModels
         {
             await SetInitialParametersAsync();
 
-            var res = await _shellExecuter.ExecuteClean();
-
-            if (!res)
-                OutletLengthText = "q";
+            var result = await _shellExecuter.ExecuteClean();
+            OutletLengthText = $"Результат вывода: {result}";
         }
 
         public async Task StartCalculations()
