@@ -28,17 +28,6 @@ namespace AutoFoam.UI.Services.Shell
                 CreateNoWindow = true
             };
 
-            var a = File.Exists(scriptPath);
-            
-            File.Create($"{sourcePath}/Foo.txt")
-                .Close();
-            using (StreamWriter writer  = new StreamWriter($"{sourcePath}/Foo.txt"))
-            {
-                writer.WriteLine(a);
-
-                writer.Close();
-            }
-
             using (Process process = Process.Start(processInfo))
             {
                 string output = await process.StandardOutput.ReadToEndAsync();
@@ -57,7 +46,7 @@ namespace AutoFoam.UI.Services.Shell
 
         public async Task<int> ExecuteClean()
         {
-            string cleanPath = Path.Combine(sourcePath, "Clean.sh");
+            string cleanPath = $"{sourcePath}/Clean.sh";
 
             var result = await Execute(cleanPath);
 
