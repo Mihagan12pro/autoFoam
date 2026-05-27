@@ -46,7 +46,7 @@ namespace AutoFoam.UI.Services.Shell
 
         public async Task<int> ExecuteClean()
         {
-            string cleanPath = Path.Combine(sourcePath, "ParaView.sh");
+            string cleanPath = Path.Combine(sourcePath, "Run.sh");
 
             var result = await Execute(cleanPath);
 
