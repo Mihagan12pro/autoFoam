@@ -1,5 +1,6 @@
 ﻿using AutoFoam.UI.Models.FlatChannel;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace AutoFoam.UI.Services.Shell
@@ -25,7 +26,9 @@ namespace AutoFoam.UI.Services.Shell
         {
             string cleanPath = Path.Combine(sourcePath, "Clean.sh");
 
-            return File.Exists(cleanPath);
+            Process.Start(cleanPath);
+
+            return true;
         }
 
         public bool ExecuteParaView()
