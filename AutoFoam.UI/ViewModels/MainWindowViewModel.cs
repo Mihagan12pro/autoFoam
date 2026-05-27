@@ -233,6 +233,13 @@ namespace AutoFoam.UI.ViewModels
             var result = await _shellExecuter.ExecuteClean();
         }
 
+        [RelayCommand]
+        public async Task OpenParaView()
+        {
+            await _shellExecuter.ExecuteParaView();
+        }
+
+        [RelayCommand]
         public async Task StartCalculations()
         {
             FlatChannel flatChannel = new FlatChannel();

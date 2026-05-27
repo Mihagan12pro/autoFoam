@@ -55,7 +55,11 @@ namespace AutoFoam.UI.Services.Shell
 
         public async Task<int> ExecuteParaView()
         {
-            throw new NotImplementedException();
+            string paraViewPath = Path.Combine(sourcePath, "ParaView.sh");
+
+            var result = await Execute(paraViewPath);
+
+            return result;
         }
 
         public async Task<int> ExecuteRun(FlatChannel flatChannel)
