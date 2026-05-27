@@ -1,1 +1,0 @@
-/home/vboxuser/autoFoam/AutoFoam.UI/bin/Debug/net8.0/../../../../Tasks/FlatChannel/Clean.sh

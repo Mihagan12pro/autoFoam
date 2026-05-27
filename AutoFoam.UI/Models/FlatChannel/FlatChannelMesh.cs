@@ -17,14 +17,13 @@ namespace AutoFoam.UI.Models.FlatChannel
         [DisplayName("triangle_height")]
         public double TriangleHeight { get; }
 
-
         [DisplayName("inlet_width")]
         public double InletWidth { get; }
 
-        [DisplayName("triangle_left_point")]
+        [DisplayName("left_triangle_point")]      
         public double TriangleLeftPoint { get; }
 
-        [DisplayName("triangle_right_point")]
+        [DisplayName("right_triangle_point")]     
         public double TriangleRightPoint { get; }
 
         [DisplayName("half_of_channel_width")]
@@ -32,7 +31,6 @@ namespace AutoFoam.UI.Models.FlatChannel
 
         [DisplayName("construction_width")]
         public double ConstructionWidth { get; }
-
 
         [DisplayName("U")]
         public double InletSpeed { get; }

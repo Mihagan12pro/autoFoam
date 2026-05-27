@@ -19,13 +19,6 @@ namespace AutoFoam.UI.Services.Shell
         Task<int> ExecuteClean();
 
         /// <summary>
-        /// Executes ChangeParams.sh
-        /// </summary>
-        /// <param name="mesh"></param>
-        /// <returns></returns>
-        Task<int> ExecuteChangeParams(TMesh mesh);
-
-        /// <summary>
         /// Opens ParaView
         /// </summary>
         /// <returns></returns>

@@ -41,8 +41,6 @@ namespace AutoFoam.UI.ViewModels
 
         private async Task SetInitialParametersAsync()
         {
-            //await _shellExecuter.ExecuteClean();
-
             InletSpeedText = "3";
             InletWidthText = "50";
             ChannelHeightText = "100";
@@ -275,7 +273,10 @@ namespace AutoFoam.UI.ViewModels
                 return;
             }
 
-            //await _shellExecuter.
+            FlatChannelMesh flatChannelMesh = new FlatChannelMesh(flatChannel, Convert.ToDouble(InletSpeedText));
+            FlatChannelExecuter flatChannelExecuter = new FlatChannelExecuter();
+
+            await flatChannelExecuter.ExecuteRun(flatChannelMesh);
         }
 
         public IEnumerable GetErrors(string? propertyName)
