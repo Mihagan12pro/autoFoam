@@ -1,5 +1,6 @@
 #!/bin/bash
-
+cd "$(dirname "$0")"
+echo "$(dirname "$0")"
 PARAMS_FILE="params.txt"
 BLOCKMESH="system/blockMeshDict"
 U_FILE="0/U"   # если у вас файл в 0_org/U — поменяйте здесь
