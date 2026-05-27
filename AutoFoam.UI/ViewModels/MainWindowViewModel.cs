@@ -43,6 +43,8 @@ namespace AutoFoam.UI.ViewModels
 
         private async Task SetInitialParametersAsync()
         {
+            await _shellExecuter.ExecuteClean();
+
             InletSpeedText = "3";
             InletWidthText = "50";
             ChannelHeightText = "100";
