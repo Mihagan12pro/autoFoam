@@ -19,7 +19,7 @@ cell_x2 120;
 cell_y1 20;
 cell_y2 10;
 cell_y3 12;
-cell_y4 58;
+cell_y4 158;
 left_triangle_point 17;
 half_of_channel_width 25;
 right_triangle_point 33;
@@ -28,7 +28,7 @@ construction_width 170;
 triangle_height 20;
 channel_bottom_point 30;
 channel_top_point 42;
-height 100;
+height 200;
 
 convertToMeters 0.001;
 
