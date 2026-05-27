@@ -1,10 +1,29 @@
-﻿using Microsoft.VisualBasic;
+﻿using System;
 using System.ComponentModel;
 
 namespace AutoFoam.UI.Models.FlatChannel
 {
     public class FlatChannelMesh : MeshBase 
     {
+        [DisplayName("cell_x1")]
+        public double CellX1 { get; }
+
+        [DisplayName("cell_x2")]
+        public double CellX2 { get; }
+
+        [DisplayName("cell_y1")]
+        public double CellY1 { get; }
+
+        [DisplayName("cell_y2")]
+        public double CellY2 { get; }
+
+        [DisplayName("cell_y3")]
+        public double CellY3 { get; }
+
+        [DisplayName("cell_y4")]
+        public double CellY4 { get; }
+
+
         [DisplayName("height")]
         public double Height { get; }
 
@@ -16,6 +35,8 @@ namespace AutoFoam.UI.Models.FlatChannel
 
         [DisplayName("triangle_height")]
         public double TriangleHeight { get; }
+
+
 
         [DisplayName("inlet_width")]
         public double InletWidth { get; }
@@ -32,8 +53,14 @@ namespace AutoFoam.UI.Models.FlatChannel
         [DisplayName("construction_width")]
         public double ConstructionWidth { get; }
 
+
+
         [DisplayName("U")]
         public double InletSpeed { get; }
+
+
+
+        private double _baseCellSize = 1;
 
         public FlatChannelMesh(FlatChannel channel, double inletSpeed)
         {
@@ -49,6 +76,23 @@ namespace AutoFoam.UI.Models.FlatChannel
             TriangleLeftPoint = HalfOfChannelWidth - channel.TriangleBase / 2;
             TriangleRightPoint = HalfOfChannelWidth + channel.TriangleBase / 2;
             ConstructionWidth = channel.InletWidth + channel.OutletLength;
+
+            CellX1 = Math.Round(InletWidth / _baseCellSize / 2);
+
+            CellX2 = Math.Round(
+                (ConstructionWidth - InletWidth) / _baseCellSize);
+
+            CellY1 = Math.Round(
+                TriangleHeight / _baseCellSize);
+
+            CellY2 = Math.Round(
+                (ChannelBottomPoint - TriangleHeight) / _baseCellSize);
+
+            CellY3 = Math.Round(
+                (ChannelTopPoint - ChannelBottomPoint) / _baseCellSize);
+
+            CellY4 = Math.Round(
+                (Height - ChannelTopPoint) / _baseCellSize);
         }
     }
 }
