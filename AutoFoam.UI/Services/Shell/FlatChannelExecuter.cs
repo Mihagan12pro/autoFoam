@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
-    internal class FlatChannelExecuter : IShellExecuter
+    internal class FlatChannelExecuter : IShellExecuter<FlatChannelMesh>
     {
         private string sourcePath = Path.Combine(
                     AppContext.BaseDirectory,
@@ -39,8 +39,12 @@ namespace AutoFoam.UI.Services.Shell
             }
         }
 
-        public async Task<int> ExecuteChangeParams(FlatChannel flatChannel)
+        public async Task<int> ExecuteChangeParams(FlatChannelMesh mesh)
         {
+            string paramsPath = Path.Combine(sourcePath, "params.txt");
+
+            var a = File.Exists(paramsPath);
+
             throw new NotImplementedException();
         }
 
@@ -62,7 +66,7 @@ namespace AutoFoam.UI.Services.Shell
             return result;
         }
 
-        public async Task<int> ExecuteRun(FlatChannel flatChannel)
+        public async Task<int> ExecuteRun(FlatChannelMesh mesh)
         {
             throw new NotImplementedException();
         }

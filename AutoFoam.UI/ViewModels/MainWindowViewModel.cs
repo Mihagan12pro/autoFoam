@@ -18,8 +18,6 @@ namespace AutoFoam.UI.ViewModels
     public partial class MainWindowViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly IDialogsService _dialogsService;
-        private readonly ICalculationService _culculationService;
-        private readonly IShellExecuter _shellExecuter;
 
         private readonly Dictionary<string, List<string>> _errors = new();
 
@@ -36,22 +34,22 @@ namespace AutoFoam.UI.ViewModels
             ChannelHeightText = "100";
             LegHeightText = "30";
             TriangleHeightText = "20";
-            TriangleBaseText = "20";
-            OutletWidthText = "50";
+            TriangleBaseText = "16";
+            OutletWidthText = "12";
             OutletLengthText = "120";
         }
 
         private async Task SetInitialParametersAsync()
         {
-            await _shellExecuter.ExecuteClean();
+            //await _shellExecuter.ExecuteClean();
 
             InletSpeedText = "3";
             InletWidthText = "50";
             ChannelHeightText = "100";
             LegHeightText = "30";
             TriangleHeightText = "20";
-            TriangleBaseText = "20";
-            OutletWidthText = "50";
+            TriangleBaseText = "16";
+            OutletWidthText = "12";
             OutletLengthText = "120";
         }
 
@@ -232,13 +230,15 @@ namespace AutoFoam.UI.ViewModels
         {
             await SetInitialParametersAsync();
 
-            var result = await _shellExecuter.ExecuteClean();
+            FlatChannelExecuter executer = new FlatChannelExecuter();
+            await executer.ExecuteClean();
         }
 
         [RelayCommand]
         public async Task OpenParaView()
         {
-            await _shellExecuter.ExecuteParaView();
+            FlatChannelExecuter executer = new FlatChannelExecuter();
+            await executer.ExecuteParaView();
         }
 
         [RelayCommand]
@@ -274,6 +274,8 @@ namespace AutoFoam.UI.ViewModels
 
                 return;
             }
+
+            //await _shellExecuter.
         }
 
         public IEnumerable GetErrors(string? propertyName)
@@ -293,10 +295,6 @@ namespace AutoFoam.UI.ViewModels
             SetInitialParameters();
 
             _dialogsService = new DialogsService(this);
-
-            _culculationService = new CalculationService();
-            
-            _shellExecuter = new FlatChannelExecuter();
         }
     }
 }

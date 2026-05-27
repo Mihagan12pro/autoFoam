@@ -1,9 +1,16 @@
-﻿using AutoFoam.UI.Models.FlatChannel;
+﻿using AutoFoam.UI.Models;
+using AutoFoam.UI.Models.FlatChannel;
 using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
     public interface IShellExecuter
+    {
+        Task<int> Execute(string scriptPath);
+    }
+
+    public interface IShellExecuter<TMesh>  : IShellExecuter
+        where TMesh : MeshBase
     {
         /// <summary>
         /// Executes Clean.sh
@@ -14,9 +21,9 @@ namespace AutoFoam.UI.Services.Shell
         /// <summary>
         /// Executes ChangeParams.sh
         /// </summary>
-        /// <param name="flatChannel"></param>
+        /// <param name="mesh"></param>
         /// <returns></returns>
-        Task<int> ExecuteChangeParams(FlatChannel flatChannel);
+        Task<int> ExecuteChangeParams(TMesh mesh);
 
         /// <summary>
         /// Opens ParaView
@@ -29,8 +36,6 @@ namespace AutoFoam.UI.Services.Shell
         /// </summary>
         /// <param name="flatChannel"></param>
         /// <returns></returns>
-        Task<int> ExecuteRun(FlatChannel flatChannel);
-
-        Task<int> Execute(string scriptPath);
+        Task<int> ExecuteRun(TMesh mesh);
     }
 }
