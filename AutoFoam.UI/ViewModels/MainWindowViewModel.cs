@@ -230,7 +230,7 @@ namespace AutoFoam.UI.ViewModels
         {
             await SetInitialParametersAsync();
 
-            _shellExecuter.ExecuteClean();
+            await _shellExecuter.ExecuteClean();
         }
 
         public async Task StartCalculations()

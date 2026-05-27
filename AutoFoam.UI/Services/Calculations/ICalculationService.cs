@@ -10,6 +10,6 @@ namespace AutoFoam.UI.Services.Calculations
 {
     public interface ICalculationService
     {
-        bool Culc(IShellExecuter shellExecuter);
+        Task<bool> Culc(IShellExecuter shellExecuter);
     }
 }

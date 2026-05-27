@@ -1,4 +1,5 @@
 ﻿using AutoFoam.UI.Models.FlatChannel;
+using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
@@ -8,26 +9,28 @@ namespace AutoFoam.UI.Services.Shell
         /// Executes Clean.sh
         /// </summary>
         /// <returns></returns>
-        bool ExecuteClean();
+        Task<bool> ExecuteClean();
 
         /// <summary>
         /// Executes ChangeParams.sh
         /// </summary>
         /// <param name="flatChannel"></param>
         /// <returns></returns>
-        bool ExecuteChangeParams(FlatChannel flatChannel);
+        Task<bool> ExecuteChangeParams(FlatChannel flatChannel);
 
         /// <summary>
         /// Opens ParaView
         /// </summary>
         /// <returns></returns>
-        bool ExecuteParaView();
+        Task<bool> ExecuteParaView();
 
         /// <summary>
         /// Executes Run.sh
         /// </summary>
         /// <param name="flatChannel"></param>
         /// <returns></returns>
-        bool ExecuteRun(FlatChannel flatChannel);
+        Task<bool> ExecuteRun(FlatChannel flatChannel);
+
+        Task<bool> Execute(string scriptPath);
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
@@ -17,12 +18,46 @@ namespace AutoFoam.UI.Services.Shell
                     "FlatChannel"
                 );
 
-        public bool ExecuteChangeParams(FlatChannel flatChannel)
+        public async Task<bool> Execute(string scriptPath)
+        {
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = "/bin/bash",
+                Arguments = $"\"{scriptPath}\"", 
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using (Process process = Process.Start(processInfo))
+            {
+                string output = await process.StandardOutput.ReadToEndAsync();
+                string error = await process.StandardError.ReadToEndAsync();
+
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
+                {
+                    Console.WriteLine($"Успех:\n{output}");
+
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Ошибка (код {process.ExitCode}):\n{error}");
+
+                    return false;
+                }
+            }
+        }
+
+        public async Task<bool> ExecuteChangeParams(FlatChannel flatChannel)
         {
             throw new NotImplementedException();
         }
 
-        public bool ExecuteClean()
+        public async Task<bool> ExecuteClean()
         {
             string cleanPath = Path.Combine(sourcePath, "Clean.sh");
 
@@ -31,12 +66,12 @@ namespace AutoFoam.UI.Services.Shell
             return true;
         }
 
-        public bool ExecuteParaView()
+        public async Task<bool> ExecuteParaView()
         {
             throw new NotImplementedException();
         }
 
-        public bool ExecuteRun(FlatChannel flatChannel)
+        public async Task<bool> ExecuteRun(FlatChannel flatChannel)
         {
             throw new NotImplementedException();
         }
