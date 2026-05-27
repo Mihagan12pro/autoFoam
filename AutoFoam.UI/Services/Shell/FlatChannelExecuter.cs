@@ -87,7 +87,11 @@ namespace AutoFoam.UI.Services.Shell
 
             await File.WriteAllLinesAsync(paramsPath, lines);
 
-            throw new NotImplementedException();
+            string runPath = Path.Combine(sourcePath, "Run.sh");
+
+            var result = await Execute(runPath);
+
+            return result;
         }
     }
 }
