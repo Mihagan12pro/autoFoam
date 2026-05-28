@@ -17,7 +17,7 @@ channel_bottom_point
 channel_top_point  
 42
 height                
-200
+100
 cell_x1 
 25
 cell_x2
@@ -29,5 +29,5 @@ cell_y2
 cell_y3
 12
 cell_y4 
-158
+58
 

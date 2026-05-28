@@ -1,8 +1,15 @@
 ﻿using AutoFoam.UI.ViewModels;
 using Avalonia.Controls;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
+using Avalonia.Utilities;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +20,10 @@ namespace AutoFoam.UI.Services.Dialog
     {
         private readonly ViewModelBase _viewModel;
         private readonly TopLevel _topLevel;
+
+        private readonly string _logoPath = new FileInfo(
+                Path.Combine("..", "..", "..", "Assets", "avalonia-logo.ico")
+            ).FullName;
 
         public async Task SaveProject()
         {
@@ -51,14 +62,29 @@ namespace AutoFoam.UI.Services.Dialog
 
         public async Task ShowErrors(IEnumerable<string> errors)
         {
-            ErrorsWindowViewModel errorsWindowView = new ErrorsWindowViewModel(errors);
+            var parent = ViewLocator.ResolveViewFromViewModel(_viewModel);
 
-            ErrorsWindow window = new ErrorsWindow();
-            window.DataContext = errorsWindowView;
+            string errorString = string.Empty;
+            foreach(var error in errors)
+            {
+                errorString += '\n' + error + '\n';
+            }
 
-            Window parent = ViewLocator.ResolveViewFromViewModel(_viewModel);
+            var box = MessageBoxManager
+                .GetMessageBoxCustom(new MessageBoxCustomParams()
+                {
+                    Topmost = true,
 
-            window.Show();
+                    SizeToContent = SizeToContent.WidthAndHeight,
+
+                    WindowIcon = new WindowIcon(new Bitmap((_logoPath))),
+
+                    ContentTitle = "Список ошибок", 
+
+                    ContentMessage = errorString,
+                });
+
+            await box.ShowWindowAsync();
         }
 
         public DialogsService(ViewModelBase viewModel)
