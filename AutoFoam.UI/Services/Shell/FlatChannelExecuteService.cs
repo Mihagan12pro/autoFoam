@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
-    internal class FlatChannelExecuter : IShellExecuter<FlatChannelMesh>
+    internal class FlatChannelExecuteService : IShellExecuter<FlatChannelMesh>
     {
         private string sourcePath = Path.Combine(
                     AppContext.BaseDirectory,

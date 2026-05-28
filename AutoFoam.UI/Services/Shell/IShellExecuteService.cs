@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace AutoFoam.UI.Services.Shell
 {
-    public interface IShellExecuter
+    public interface IShellExecuteService
     {
         Task<int> Execute(string scriptPath);
     }
 
-    public interface IShellExecuter<TMesh>  : IShellExecuter
+    public interface IShellExecuter<TMesh>  : IShellExecuteService
         where TMesh : MeshBase
     {
         /// <summary>

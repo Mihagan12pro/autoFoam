@@ -227,14 +227,14 @@ namespace AutoFoam.UI.ViewModels
         {
             await SetInitialParametersAsync();
 
-            FlatChannelExecuter executer = new FlatChannelExecuter();
+            FlatChannelExecuteService executer = new FlatChannelExecuteService();
             await executer.ExecuteClean();
         }
 
         [RelayCommand]
         public async Task OpenParaView()
         {
-            FlatChannelExecuter executer = new FlatChannelExecuter();
+            FlatChannelExecuteService executer = new FlatChannelExecuteService();
             await executer.ExecuteParaView();
         }
 
@@ -273,7 +273,7 @@ namespace AutoFoam.UI.ViewModels
             }
 
             FlatChannelMesh flatChannelMesh = new FlatChannelMesh(flatChannel, Convert.ToDouble(InletSpeedText));
-            FlatChannelExecuter flatChannelExecuter = new FlatChannelExecuter();
+            FlatChannelExecuteService flatChannelExecuter = new FlatChannelExecuteService();
 
             await flatChannelExecuter.ExecuteRun(flatChannelMesh);
         }
