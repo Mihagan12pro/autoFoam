@@ -52,42 +52,42 @@
                       RowDefinitions="*,*,*,*,*,*,*,*">
 
                              <StackPanel Grid.Row="0">
-                        <Label Content="Высота канала"/>
+                        <Label Content="Высота канала h"/>
                         <TextBox Text="{Binding ChannelHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <Label Content="Высота ножки"/>
+                        <Label Content="Высота ножки hl" />
                         <TextBox Text="{Binding LegHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2">
-                        <Label Content="Высота треугольника"/>
+                        <Label Content="Высота треугольника ht"/>
                         <TextBox Text="{Binding TriangleHeightText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3">
-                        <Label Content="Основание треугольника"/>
+                        <Label Content="Основание треугольника wt"/>
                         <TextBox Text="{Binding TriangleBaseText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="4">
-                        <Label Content="Ширина входа"/>
+                        <Label Content="Ширина входа wi"/>
                         <TextBox Text="{Binding InletWidthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="5">
-                        <Label Content="Длина выхода"/>
+                        <Label Content="Длина выхода lo"/>
                         <TextBox Text="{Binding OutletLengthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="6">
-                        <Label Content="Ширина выхода"/>
+                        <Label Content="Ширина выхода wo"/>
                         <TextBox Text="{Binding OutletWidthText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="7">
-                        <Label Content="Скорость на входе"/>
+                        <Label Content="Скорость на входе U"/>
                         <TextBox Text="{Binding InletSpeedText, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>

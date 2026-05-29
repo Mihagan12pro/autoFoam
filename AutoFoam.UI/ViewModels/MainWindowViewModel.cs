@@ -1,6 +1,5 @@
 ﻿using AutoFoam.UI.Extensions;
 using AutoFoam.UI.Models.FlatChannel;
-using AutoFoam.UI.Services.Calculations;
 using AutoFoam.UI.Services.Dialog;
 using AutoFoam.UI.Services.Shell;
 using CommunityToolkit.Mvvm.Input;

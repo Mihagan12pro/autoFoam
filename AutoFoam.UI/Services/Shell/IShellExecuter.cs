@@ -6,6 +6,11 @@ namespace AutoFoam.UI.Services.Shell
 {
     public interface IShellExecuter
     {
+        /// <summary>
+        /// Executes every script
+        /// </summary>
+        /// <param name="scriptPath"></param>
+        /// <returns></returns>
         Task<int> Execute(string scriptPath);
     }
 
